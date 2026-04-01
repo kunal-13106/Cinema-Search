@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Popular Movies</h1>
+<div id="movies"></div>
+
+<script>
+const API_TOKEN = "YOUR_ACCESS_TOKEN";
+
+async function getMovies() {
+  const res = await fetch("https://api.themoviedb.org/3/movie/popular", {
+    headers: {
+      Authorization: `Bearer ${API_TOKEN}`
+    }
+  });
+
+  const data = await res.json();
+
+  const container = document.getElementById("movies");
+
+  data.results.forEach(movie => {
+    const div = document.createElement("div");
+    div.innerHTML = `<p>${movie.title}</p>`;
+    container.appendChild(div);
+  });
+}
+
+getMovies();
+</script>
+
+</body>
+</html>
